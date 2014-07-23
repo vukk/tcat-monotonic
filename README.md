@@ -6,10 +6,10 @@ Prepends shell output with monotonic timestamps. A mix of tcat and monotonic_tim
 Install
 -------
 
-``
+```
 make
 make install
-``
+```
 
 Or just ``make`` and copy the ``tcat-monotonic`` binary to wherever you want.
 
