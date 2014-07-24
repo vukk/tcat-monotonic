@@ -1,8 +1,18 @@
 
+PLATFORM = $(shell uname -s)
+LIBS_FOR_GCC = -lm -lrt
+LIBS_FOR_DARWIN = -lm
+LIBS = -lm -lrt # default libraries if OS is not recognized
 PREFIX ?= /usr/local
 TARGET = tcat-monotonic
-LIBS = -lm -lrt
 CFLAGS = -std=c99 -Wall -Wextra -Werror -Os
+
+ifeq ($(PLATFORM), Linux)
+  LIBS = $(LIBS_FOR_GCC)
+endif
+ifeq ($(PLATFORM), Darwin)
+  LIBS = $(LIBS_FOR_DARWIN)
+endif
 
 .PHONY: default all clean install uninstall
 
@@ -29,3 +39,4 @@ install: $(TARGET)
 
 uninstall:
 	rm -f $(PREFIX)/bin/$(TARGET)
+
